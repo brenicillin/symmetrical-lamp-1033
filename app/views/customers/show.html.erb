@@ -2,5 +2,12 @@
 <% @customer.items.each do |item| %>
   <ul><%= item.name %></ul>
   <li>Cost USD: $<%= item.price %></li>
-  <li>Available At: <%= item.supermarket.name %></li>
+  <li>Available at: <%= item.supermarket.name %></li>
+<% end %>
+<br/>
+Add Item to Cart:
+<%= form_with path: "/customer/#{@customer.id}", method: :patch, local: true do |form| %>
+  <%= form.label :item_id %>
+  <%= form.text_field :item_id %>
+  <%= form.submit "Submit" %>
 <% end %>
