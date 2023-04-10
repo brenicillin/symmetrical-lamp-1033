@@ -1,7 +1,9 @@
 <h1>All Items</h1>
 <% @items.each do |item| %>
-  <ul id="<%=item.id%>"><%= item.name %></ul>
+  <div id="item_<%= item.id %>">
+  <ul><%= item.name %></ul>
   <li>Cost USD: $<%= item.price %></li>
   <li>Available at: <%= item.supermarket.name %></li>
   <li>Buyers: <%= item.customer_count %></li>
+  </div>
 <% end %>
