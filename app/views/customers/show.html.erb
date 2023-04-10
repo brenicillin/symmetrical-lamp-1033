@@ -8,8 +8,10 @@
 <% end %>
 <br/>
 Add Item to Cart:
+<div id="add_items">
 <%= form_with path: "/customer/#{@customer.id}", method: :patch, local: true do |form| %>
   <%= form.label :item_id %>
   <%= form.text_field :item_id %>
   <%= form.submit "Submit" %>
 <% end %>
+</div>
