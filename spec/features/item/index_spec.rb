@@ -26,18 +26,24 @@ RSpec.describe 'Item Index Page' do
   describe 'As a visitor' do
     it 'I can see a list of all items' do
       visit "/items"
-      expect(page).to have_content("Milk")
-      expect(page).to have_content("Cost USD: $3")
-      expect(page).to have_content("Publix")
-      expect(page).to have_content("Buyers: 2")
-      expect(page).to have_content("Eggs")
-      expect(page).to have_content("Cost USD: $13")
-      expect(page).to have_content("Publix")
-      expect(page).to have_content("Buyers: 1")
-      expect(page).to have_content("Bread")
-      expect(page).to have_content("Cost USD: $5")
-      expect(page).to have_content("Publix")
-      expect(page).to have_content("Buyers: 1")
+      within "#item_#{@item_1.id}" do
+        expect(page).to have_content(@item_1.name)
+        expect(page).to have_content("Cost USD: $3")
+        expect(page).to have_content("Available at: Publix")
+        expect(page).to have_content("Buyers: 2")
+      end
+      within "#item_#{@item_2.id}" do
+        expect(page).to have_content(@item_2.name)
+        expect(page).to have_content("Cost USD: $13")
+        expect(page).to have_content("Available at: Publix")
+        expect(page).to have_content("Buyers: 1")
+      end
+      within "#item_#{@item_3.id}" do
+        expect(page).to have_content(@item_3.name)
+        expect(page).to have_content("Cost USD: $5")
+        expect(page).to have_content("Available at: Publix")
+        expect(page).to have_content("Buyers: 1")
+      end
     end
   end
 end
