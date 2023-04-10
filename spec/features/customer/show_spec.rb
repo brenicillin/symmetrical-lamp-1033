@@ -34,11 +34,16 @@ RSpec.describe 'Customer Show Page' do
       visit "/customers/#{@customer.id}"
       
       expect(page).to have_content(@customer.name)
-      expect(page).to have_content("Milk")
-      expect(page).to have_content("Eggs")
-      expect(page).to have_content("Cost USD: $3")
-      expect(page).to have_content("Cost USD: $13")
-      expect(page).to have_content("Available at: Publix")
+      within "#item_#{@item_1.id}" do
+        expect(page).to have_content(@item_1.name)
+        expect(page).to have_content(@item_1.price)
+        expect(page).to have_content(@supermarket.name)
+      end
+      within "#item_#{@item_2.id}" do
+        expect(page).to have_content(@item_2.name)
+        expect(page).to have_content(@item_2.price)
+        expect(page).to have_content(@supermarket.name)
+      end
     end
 
     it 'I can add an item to a customer' do
