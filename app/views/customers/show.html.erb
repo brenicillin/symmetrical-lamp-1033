@@ -1,8 +1,10 @@
 <h1><%= @customer.name %></h1>
 <% @customer.items.each do |item| %>
+<div id="item_<%=item.id%>">
   <ul><%= item.name %></ul>
   <li>Cost USD: $<%= item.price %></li>
   <li>Available at: <%= item.supermarket.name %></li>
+</div>
 <% end %>
 <br/>
 Add Item to Cart:
