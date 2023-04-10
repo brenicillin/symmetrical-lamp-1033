@@ -7,4 +7,3 @@ class Item < ApplicationRecord
     customers.count
   end
 end
-

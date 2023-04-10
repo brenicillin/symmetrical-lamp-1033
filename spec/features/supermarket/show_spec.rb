@@ -13,11 +13,18 @@ RSpec.describe 'Supermarket Show Page' do
     @customer_2.items << @item_1
     @customer_2.items << @item_3
   end
+
   describe 'As a visitor' do
     it 'I can see a list of all customers' do
       visit "/supermarkets/#{@supermarket.id}"
-      expect(page).to have_content(@customer_1.name)
-      expect(page).to have_content(@customer_2.name)
+
+      within "#customer_#{@customer_1.id}" do
+        expect(page).to have_content(@customer_1.name)
+      end
+
+      within "#customer_#{@customer_2.id}" do
+        expect(page).to have_content(@customer_2.name)
+      end
     end
   end
 end
