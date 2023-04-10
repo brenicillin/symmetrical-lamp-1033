@@ -23,6 +23,7 @@ RSpec.describe 'Customer Show Page' do
     @supermarket = Supermarket.create!(name: "Publix", location: "123 Main Street")
     @item_1 = @supermarket.items.create!(name: "Milk", price: 3)
     @item_2 = @supermarket.items.create!(name: "Eggs", price: 13)
+    @item_3 = @supermarket.items.create!(name: "Bread", price: 5)
     @customer = Customer.create!(name: "Bob")
     @customer.items << @item_1
     @customer.items << @item_2
@@ -31,13 +32,23 @@ RSpec.describe 'Customer Show Page' do
   describe 'As a visitor' do
     it 'I can see a customer and their items' do
       visit "/customers/#{@customer.id}"
-      save_and_open_page
+      
       expect(page).to have_content(@customer.name)
       expect(page).to have_content("Milk")
       expect(page).to have_content("Eggs")
       expect(page).to have_content("Cost USD: $3")
       expect(page).to have_content("Cost USD: $13")
       expect(page).to have_content("Available at: Publix")
+    end
+
+    it 'I can add an item to a customer' do
+      visit "/customers/#{@customer.id}"
+      expect(page).to_not have_content("Bread")
+
+      fill_in :item_id, with: @item_3.id
+      click_button "Submit"
+
+      expect(page).to have_content("Bread")
     end
   end
 end
